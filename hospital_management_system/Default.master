@@ -1,0 +1,110 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Default.master.cs" Inherits="hospital_management_system.Default" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+        
+        <script src="Scripts/bootstrap.js"></script>
+        <script src="Scripts/bootstrap.min.js"></script>
+        <script src="Scripts/jquery-1.9.1-vsdoc.js"></script>  
+        <script src="Scripts/jquery-1.9.1.intellisense.js"></script>
+        <script src="Scripts/jquery-1.9.1.js"></script>  
+        <script src="Scripts/jquery-1.9.1.min.js"></script>
+        <script src="Scripts/jquery-1.9.1.min.map"></script>
+        <script src="Scripts/jquery-3.0.0-vsdoc.js"></script> 
+        <script src="Scripts/jquery-3.0.0.js"></script>
+        <script src="Scripts/jquery-3.0.0.min.js"></script>
+        <script src="Scripts/jquery-3.0.0.min.map"></script>
+        <script src="Scripts/jquery-3.0.0.slim.js"></script>   
+        <script src="Scripts/jquery-3.0.0.slim.min.js"></script>
+        <script src="Scripts/jquery-3.0.0.slim.min.map"></script>
+        <script src="Scripts/modernizr-2.8.3.js"></script>
+    </asp:ContentPlaceHolder>
+    <webopt:BundleReference runat="server" Path="Content/css" /> 
+    <link href="content/profile_menu.css" rel="stylesheet" media="screen"/>
+    <link href="content/bootstrap.css" rel="stylesheet" media="screen"/>
+      
+</head>
+
+<body>
+    <div class="container-fluid" id="container_1" style="height:100px;margin:auto; background-color: white;">
+       <div class="row" style="margin:auto;height:100px">
+            <div class="col-md-10" id="s1" style="align-content:center;height:100px;">
+                <img src="images/logo.png" />
+            </div>
+            <div class="col-md-2" id="s2" style="padding-right:50px;margin:auto;height:100px">
+                
+                <div id="navigation_buttons" style="margin:auto;float:right;height:50px;align-content:center;padding-top:8px">
+                  <asp:Panel runat="server" ID="p1"> <a  role="button" class="btn btn-info" href="register.aspx" id="reg_btn">Register</a>
+                    <a  role="button" class="btn btn-info" href="login.aspx" id="login_btn">Login</a>
+                   </asp:Panel> 
+                  
+                    <ul id="profile_ul" style="float:right;">
+                        <li id="profile_li">
+                            <asp:Label runat="server" ID="profile_name" CssClass="btn btn-danger" Width="75px"><%# Eval( Session["username"].ToString()) %> &#9662;</asp:Label>
+                            <ul class="dropdown" id="profile_dropdown">
+                                <li><a href="home.aspx">My Account</a></li><li class="nav-divider"></li>
+                                <li><a href="patienteditprofile.aspx">Edit Profile</a></li><li class="nav-divider"></li>
+                                <li><a href="patientlogout.aspx">Log Out</a></li><li class="nav-divider"></li>
+                              </ul>
+                        </li>
+                    </ul>
+                  </div>
+                
+            </div>
+       </div>
+    </div>
+    <!--menu bar-->
+       
+<div class="container-fluid" id="container_2" style="align-content:center;margin-top:15px;margin-left:15px;margin-right:15px">
+<div class="nav" >
+    <div class="row" >
+        <div class="dropdown" style="border:none;">
+            <ul style="padding-left:150px;">
+                <li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li>    
+                    <a href="#">Patient care &#9662;</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Find a Doctor</a></li><li class="nav-divider"></li>
+                        <li><a href="#">Service Excellence</a></li><li class="nav-divider"></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Centres Of Excellence &#9662;</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Hearts</a></li><li class="nav-divider"></li>
+                        <li><a href="#">Orthopedics</a></li><li class="nav-divider"></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Procedures &#9662;</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Minimally Invasive Cardiac Sergery</a></li><li class="nav-divider"></li>
+                        <li><a href="#">Cosmetic Sergery</a></li><li class="nav-divider"></li>         
+                    </ul>
+                </li>
+            
+            </ul>
+   </div>
+</div>
+</div>
+
+
+</div>
+
+
+
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            
+        </asp:ContentPlaceHolder>
+    </div>
+    <script src="Scripts/jquery-1.9.1.js"></script>
+    <script src="Scripts/bootstrap.js"></script> 
+   
+</body>
+</html>

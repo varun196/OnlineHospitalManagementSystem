@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="hospital_management_system" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Desktop\Hospital_management_system_Final\hospital_management_system\App_Data\hospital_management_system.mdf;Integrated Security=True" SettingsObjectName="data_layer.Properties.Settings" SettingsPropertyName="hospital_management_systemConnectionString2" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.bill_item" Member="bill_items">
+    <Type Name="bill_item">
+      <Column Name="billid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="qty" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="item_bill_item" Member="item" ThisKey="itemid" OtherKey="itemid" Type="item" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bill_master" Member="bill_masters">
+    <Type Name="bill_master">
+      <Column Name="billid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="caseid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="paid" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="total" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="case_master_bill_master" Member="case_master" ThisKey="caseid" OtherKey="caseid" Type="case_master" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.case_master" Member="case_masters">
+    <Type Name="case_master">
+      <Column Name="caseid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ailments" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="isactive" Type="System.String" DbType="VarChar(7) NOT NULL" CanBeNull="false" />
+      <Column Name="chiefcomplaint" Type="System.String" DbType="VarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="examinationresult" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="casefee" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="reportrequirement" Type="System.String" DbType="VarChar(1000)" CanBeNull="true" />
+      <Column Name="treatments" Type="System.String" DbType="VarChar(500)" CanBeNull="true" />
+      <Column Name="[treatment-date]" Member="treatment_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="[treatment-fee]" Member="treatment_fee" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Association Name="case_master_bill_master" Member="bill_masters" ThisKey="caseid" OtherKey="caseid" Type="bill_master" />
+      <Association Name="case_master_doctor_case" Member="doctor_cases" ThisKey="caseid" OtherKey="caseid" Type="doctor_case" />
+      <Association Name="patient_case_master" Member="patient" ThisKey="patientid" OtherKey="patientid" Type="patient" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.doctor" Member="doctors">
+    <Type Name="doctor">
+      <Column Name="doctorid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="phoneno" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="qualification" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="experience" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="field" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="salary" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dob" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="doctor_doctor_case" Member="doctor_cases" ThisKey="doctorid" OtherKey="doctorid" Type="doctor_case" />
+      <Association Name="doctor_cheque" Member="cheques" ThisKey="doctorid" OtherKey="doctorid" Type="cheque" />
+    </Type>
+  </Table>
+  <Table Name="dbo.item" Member="items">
+    <Type Name="item">
+      <Column Name="itemid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="cost_per_item" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="item_bill_item" Member="bill_items" ThisKey="itemid" OtherKey="itemid" Type="bill_item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.doctor_case" Member="doctor_cases">
+    <Type Name="doctor_case">
+      <Column Name="doctorid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="caseid" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="case_master_doctor_case" Member="case_master" ThisKey="caseid" OtherKey="caseid" Type="case_master" IsForeignKey="true" />
+      <Association Name="doctor_doctor_case" Member="doctor" ThisKey="doctorid" OtherKey="doctorid" Type="doctor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.room_master" Member="room_masters">
+    <Type Name="room_master">
+      <Column Name="roomid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="patientid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="roomtype" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="roomcost" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PresentBalance" Member="PresentBalances">
+    <Type Name="PresentBalance">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ident" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cost" Member="costs">
+    <Type Name="cost">
+      <Column Name="date" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="starting_balance" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="billid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="chequeid" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="final_balance" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Column Name="CostId" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.patient" Member="patients">
+    <Type Name="patient">
+      <Column Name="patientid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="fname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="mname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="lname" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="dob" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="age" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="phoneno" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="address" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="bloodgroup" Type="System.String" DbType="VarChar(5) NOT NULL" CanBeNull="false" />
+      <Column Name="maritalstatus" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="pictureurl" Type="System.String" DbType="VarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="occupation" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="patient_case_master" Member="case_masters" ThisKey="patientid" OtherKey="patientid" Type="case_master" />
+    </Type>
+  </Table>
+  <Table Name="dbo.cheque" Member="cheques">
+    <Type Name="cheque">
+      <Column Name="chequeid" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="doctorid" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime2 NOT NULL" CanBeNull="false" />
+      <Column Name="amount" Type="System.Int64" DbType="BigInt NOT NULL" CanBeNull="false" />
+      <Association Name="doctor_cheque" Member="doctor" ThisKey="doctorid" OtherKey="doctorid" Type="doctor" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

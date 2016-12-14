@@ -1,0 +1,91 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.Master.cs" Inherits="hospital_management_system.AdminHome" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+ 
+    </asp:ContentPlaceHolder>
+        <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css"/>
+	    <script src="Scripts/jquery.min.js"></script>
+	    <script src="Bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+         $(document).ready(function () {
+             var loc = window.location.href;
+
+             if (loc.match('AdminViewDoctor') || loc.match('AdminEditDoctor') || loc.match('AdminAddDoctor') || loc.match('AdminPaySalary')) { 
+                 document.getElementById("doc").setAttribute("class", "active dropdown");
+             }
+             else if (loc.match('CM_ViewItem') || loc.match('CM_AddItem') || loc.match('CM_EditItem')) { // software is the name of the page/slug
+                 document.getElementById("items").setAttribute("class", "active");
+             }
+             else if (loc.match('AdminSeeHistory')) { // software is the name of the page/slug
+                 document.getElementById("his").setAttribute("class", "active");
+             }
+             else if (loc.match('AdminAddRoom') || loc.match('AdminViewRoom')) { // software is the name of the page/slug
+                 document.getElementById("roo").setAttribute("class", "active");
+             }
+             else if (loc.match('AdminViewCheque') ) { // software is the name of the page/slug
+                 document.getElementById("vc").setAttribute("class", "active");
+             }
+             
+         });
+         
+     </script>
+      
+</head>
+<body>
+   
+     <!--menu bar-->
+     <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      </button>
+      <a class="navbar-brand" href="AdminHome.aspx">Admin Portal</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li id="home"><a href="AdminHome">Home</a></li>
+        <li id="doc">
+          <a data-toggle="dropdown" href="#" class="dropdown-toggle">Manage Doctor <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="AdminViewDoctor">View and Edit Doctors</a></li>
+           
+            <li><a href="AdminPaySalary">Give Salary</a></li>
+          </ul>
+        </li>
+        <li id="items">
+          <a data-toggle="dropdown" href="#" class="dropdown-toggle">Manage Items <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="CM_ViewItem">View & Edit Items</a></li>
+            <li><a href="CM_AddItem">Add Item</a></li>
+          </ul>
+        </li>
+        <li id="his"><a href="AdminSeeHistory">See Transactions</a></li>
+         <li id="roo">
+          <a data-toggle="dropdown" href="#" class="dropdown-toggle">Manage Rooms <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="AdminViewRoom">View and Delete Rooms</a></li>
+            <li><a href="AdminAddRoom">Add Room</a></li>
+          </ul>
+         </li>
+          <li id="vc"><a href="AdminViewCheque">View Cheques</a></li>
+         
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="DoctorLogout.aspx"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+      </ul>
+    </div>
+</nav>
+  
+    <!--ContentPlaceHolder -->
+     <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+  
+</body>
+</html>

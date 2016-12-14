@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Doctor.Master.cs" Inherits="hospital_management_system.Site1" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+     
+    </asp:ContentPlaceHolder>
+    <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css"/>
+	<script src="Scripts/jquery.min.js"></script>
+	<script src="Bootstrap/js/bootstrap.min.js"></script>
+    <!-- Set Active in nav bar -->
+    <script type="text/javascript">
+         $(document).ready(function () {
+             var loc = window.location.href;
+
+             if (loc.match('DoctorHome')) { // software is the name of the page/slug
+                 document.getElementById("home").setAttribute("class", "active");
+             }
+             else if (loc.match('DoctorEditProfile')) { // software is the name of the page/slug
+                 document.getElementById("EditP").setAttribute("class", "active");
+             }
+             else if (loc.match('DoctorViewActiveCases')) { // software is the name of the page/slug
+                 document.getElementById("actCases").setAttribute("class", "active");
+             }
+         });
+         
+     </script>
+</head>
+<body>
+   <!--Menu Bar-->
+    <div>
+    <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+      </button>
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li id="home" ><a href="DoctorHome.aspx">Home</a></li>
+        <li id="actCases"><a href="DoctorViewActiveCases.aspx">View Active Cases</a></li>
+        <li id="EditP" ><a href="DoctorEditProfile.aspx">Edit Profile</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+          <li style="padding-top:16px;"><asp:Label runat="server" CssClass="control-label" ID="profile_name"></asp:Label></li>
+        <li><a href="DoctorLogout.aspx"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+    </div>
+</nav>
+    </div>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+  
+  
+</body>
+</html>
